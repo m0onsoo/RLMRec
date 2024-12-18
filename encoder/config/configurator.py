@@ -6,6 +6,10 @@ import argparse
 import numpy as np
 import torch.nn as nn
 
+class Colors:
+    GREEN = '\033[92m'
+    END = '\033[0m'
+
 def parse_configure(model=None, dataset=None):
     parser = argparse.ArgumentParser(description='RLMRec')
     parser.add_argument('--model', type=str, default='LightGCN', help='Model name')
@@ -27,6 +31,8 @@ def parse_configure(model=None, dataset=None):
     else:
         model_name = 'default'
         # print("Read the default (blank) configuration.")
+
+    print(Colors.GREEN + "Model: {}".format(model_name) + Colors.END)
 
     # dataset
     if dataset is not None:
@@ -50,8 +56,11 @@ def parse_configure(model=None, dataset=None):
             configs['train']['seed'] = args.seed
 
         # semantic embeddings
-        usrprf_embeds_path = "./data/{}/usr_emb_np.pkl".format(configs['data']['name'])
-        itmprf_embeds_path = "./data/{}/itm_emb_np.pkl".format(configs['data']['name'])
+        usrprf_embeds_path = "./data/{}/all_data/usr_emb_mean.pkl".format(configs['data']['name'])
+        itmprf_embeds_path = "./data/{}/all_data/itm_emb_mean.pkl".format(configs['data']['name'])
+        print()
+        print("사용중인 usrprf_emb: {}".format(usrprf_embeds_path))
+
         with open(usrprf_embeds_path, 'rb') as f:
             configs['usrprf_embeds'] = pickle.load(f)
         with open(itmprf_embeds_path, 'rb') as f:

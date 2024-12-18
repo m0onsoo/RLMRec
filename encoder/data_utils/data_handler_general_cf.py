@@ -15,11 +15,16 @@ class DataHandlerGeneralCF:
             predir = './data/yelp/'
         elif configs['data']['name'] == 'steam':
             predir = './data/steam/'
+        elif configs['data']['name'] == 'yelp_RLM':
+            predir = './data/yelp_RLM/'
         else:
             raise NotImplementedError
-        self.trn_file = predir + 'trn_mat.pkl'
-        self.val_file = predir + 'val_mat.pkl'
-        self.tst_file = predir + 'tst_mat.pkl'
+        self.trn_file = predir + 'all_data/trn_mat.pkl'
+        self.val_file = predir + 'all_data/val_mat.pkl'
+        self.tst_file = predir + 'all_data/tst_mat.pkl'
+
+        print("사용중인 trn mat: {}".format(self.trn_file))
+        print()
 
 
     def _load_one_mat(self, file):

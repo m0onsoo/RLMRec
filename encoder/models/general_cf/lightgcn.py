@@ -23,6 +23,13 @@ class LightGCN(BaseModel):
         # hyper-parameter
         self.layer_num = self.hyper_config['layer_num']
         self.reg_weight = self.hyper_config['reg_weight']
+
+        #
+        # print()
+        # print(f"user_embed size =", self.user_embeds.shape)
+        # print(f"item_embed size =", self.item_embeds.shape)
+        # print()
+        #
     
     def _propagate(self, adj, embeds):
         return t.spmm(adj, embeds)

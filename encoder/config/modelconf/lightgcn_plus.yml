@@ -11,7 +11,7 @@ train:
   test_step: 3
   reproducible: true
   seed: 2023
-  patience: 5
+  patience: 10
 
 test:
   metrics: [recall, ndcg]
@@ -26,7 +26,7 @@ model:
   name: lightgcn_plus
   # general parameters here
   keep_rate: 0.8
-  embedding_size: 32
+  embedding_size: 128
   # dataset-specific parameters here
   layer_num: 3
   reg_weight: 1.0e-7

@@ -28,8 +28,12 @@ Then run the following commands to create a conda environment:
 conda create -y -n rlmrec python=3.9
 conda activate rlmrec
 pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
-pip install torch-scatter -f https://data.pyg.org/whl/torch-1.13.1+cu117.html
-pip install torch-sparse -f https://data.pyg.org/whl/torch-1.13.1+cu117.html
+
+
+# 내 서버 환경에 맞게 버전 변경
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch-scatter -f https://data.pyg.org/whl/torch-2.5.1+cu118.html
+pip install torch-sparse -f https://data.pyg.org/whl/torch-2.5.1+cu118.html
 pip install pyyaml tqdm
 ```
 
@@ -110,6 +114,10 @@ The command to evaluate the backbone models and RLMRec is as follows.
   - Backbone 
 
     ```python encoder/train_encoder.py --model {model_name} --dataset {dataset} --cuda 0```   
+  
+  - RLMRec-Concat **(Constrastive Alignment)**:
+
+    ```python encoder/train_encoder.py --model {model_name}_concat --dataset {dataset} --cuda 0```
 
   - RLMRec-Con **(Constrastive Alignment)**:
 

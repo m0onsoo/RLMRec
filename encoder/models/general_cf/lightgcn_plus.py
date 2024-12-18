@@ -66,6 +66,16 @@ class LightGCN_plus(BaseModel):
         anc_embeds = user_embeds[ancs]
         pos_embeds = item_embeds[poss]
         neg_embeds = item_embeds[negs]
+
+        '''
+        print()
+        print("ancs:", ancs)
+        print("poss:", poss)
+        print("negs:", negs)
+        print("item_embeds shape:", item_embeds.shape)
+        print()
+        '''
+
         return anc_embeds, pos_embeds, neg_embeds
 
     def cal_loss(self, batch_data):
@@ -76,6 +86,9 @@ class LightGCN_plus(BaseModel):
 
         usrprf_embeds = self.mlp(self.usrprf_embeds)
         itmprf_embeds = self.mlp(self.itmprf_embeds)
+        # print()
+        # print("mlp 거친 userprf 사이즈:", usrprf_embeds.shape)
+        # print()
         ancprf_embeds, posprf_embeds, negprf_embeds = self._pick_embeds(usrprf_embeds, itmprf_embeds, batch_data)
 
         bpr_loss = cal_bpr_loss(anc_embeds, pos_embeds, neg_embeds) / anc_embeds.shape[0]
